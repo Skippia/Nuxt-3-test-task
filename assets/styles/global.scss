@@ -1,0 +1,18 @@
+/* Abstract */
+@import './abstract/_reset.scss';
+@import './abstract/_transitions.scss';
+@import './abstract/_variables.scss';
+
+html {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-optical-sizing: auto;
+}
+
+p {
+  @apply text-balance;
+}
