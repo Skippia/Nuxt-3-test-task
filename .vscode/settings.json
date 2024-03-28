@@ -1,0 +1,5 @@
+{
+  "eslint.experimental.useFlatConfig": true,
+  "scss.lint.unknownAtRules": "ignore",
+  "unocss.root": "."
+}
