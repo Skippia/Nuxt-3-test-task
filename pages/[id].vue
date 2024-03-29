@@ -1,29 +1,41 @@
 <script setup lang="ts">
 import { UserCard } from '~/components'
-import type { TUser } from '~/types'
+import { useGlobalState } from '~/store'
+import { loadCurrentClient } from '~/helpers/api'
 
 const route = useRoute()
 const clientId = computed(() => route.params.id)
 
-const { data } = await useAsyncData(
-  'client',
-  () => $fetch(`${useRuntimeConfig().public.apiBaseUrl}/api/users`, {
-    params: {
-      id: clientId.value,
-    },
-  }),
-  {
-    transform: data => (data as { data: TUser }).data,
-    watch: [clientId],
-    server: true,
-    lazy: false,
-  },
-)
+const { currentUserData } = await loadCurrentClient(clientId)
+const { mergeUserData, loadCurrentCommentAndPointsFromLC, updatePointsForCurrentUserData, updateCommentForCurrentUserData } = useClientId(currentUserData)
+
+const { pushUpdatedUserCardEvent } = useGlobalState()
+function saveUserCard({ comment, points }: { comment: string, points: number }) {
+  updatePointsForCurrentUserData(points)
+  updateCommentForCurrentUserData(comment)
+
+  // Notify aside-menu about updated user card
+  pushUpdatedUserCardEvent({
+    id: currentUserData.value!.id,
+    points,
+  })
+}
+
+watch(currentUserData, (newCurrentUserData) => {
+  if (newCurrentUserData) {
+    loadCurrentCommentAndPointsFromLC()
+    mergeUserData()
+  }
+}, {
+  immediate: true,
+})
 </script>
 
 <template>
-  <div class="grid w-full place-items-center text-2xl font-bold">
-    <UserCard v-bind="data!" />
+  <div v-if="currentUserData" class="grid w-full place-items-center text-2xl font-bold">
+    <ClientOnly>
+      <UserCard v-bind="currentUserData" @save-user-card="saveUserCard" />
+    </ClientOnly>
   </div>
 </template>
 
