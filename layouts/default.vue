@@ -1,12 +1,25 @@
 <script setup lang="ts">
 import { AsideMenu } from '~/components'
 import { UserAsideList, UserAsideSearch, UserAsideTabs } from '~/components/user-aside'
-import { breakpoints } from '~/composables'
+import { UserSearchSortedModeEnum } from '~/constants'
 
-const isLargerThanPhone = breakpoints.greaterOrEqual('tablet')
 const route = useRoute()
 
-const isClientMobilePage = computed(() => route.name === 'id' && !isLargerThanPhone.value)
+const { isClientMobilePage, searchString, isSearchVisible, filterString, sortingMode, updateFilterString, updateSearchVisibility } = useAsideLayout(route)
+
+watch(searchString, (newSearchVal) => {
+  updateFilterString(newSearchVal)
+})
+
+watch(isSearchVisible, (newShouldSearchVisibleVal) => {
+  if (newShouldSearchVisibleVal) {
+    sortingMode.value = UserSearchSortedModeEnum.STANDARD
+  }
+  else {
+    searchString.value = ''
+    sortingMode.value = UserSearchSortedModeEnum.POINTS
+  }
+})
 </script>
 
 <template>
@@ -19,15 +32,15 @@ const isClientMobilePage = computed(() => route.name === 'id' && !isLargerThanPh
 
       <AsideMenu v-else class="h-full w-full">
         <template #tabs>
-          <UserAsideTabs is-active-clients />
+          <UserAsideTabs is-active-clients @update-search-visibility="updateSearchVisibility" />
         </template>
 
         <template #search>
-          <UserAsideSearch />
+          <UserAsideSearch v-if="isSearchVisible" v-model="searchString" />
         </template>
 
         <template #content>
-          <UserAsideList />
+          <UserAsideList v-bind="{ sortingMode, filterString }" />
         </template>
       </AsideMenu>
     </ClientOnly>
