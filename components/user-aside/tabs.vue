@@ -1,19 +1,30 @@
 <script setup lang="ts">
 const props = defineProps<{
-  isActiveClients: boolean
-}>()
+  isActiveClients: boolean;
+}>();
 
 const emit = defineEmits<{
-  (e: 'updateSearchVisibility', value: boolean): void
-}>()
+  (e: "updateSearchVisibility", value: boolean): void;
+}>();
 </script>
 
 <template>
-  <div div class="w-full flex items-center justify-center rounded bg-gray-300 p-1">
-    <div class="user-aside-tab" :class="{ 'user-aside-tab--active': props.isActiveClients }" @click="emit('updateSearchVisibility', true)">
+  <div
+    div
+    class="w-full flex items-center justify-center rounded bg-gray-300 p-1"
+  >
+    <div
+      class="user-aside-tab"
+      :class="{ 'user-aside-tab--active': props.isActiveClients }"
+      @click="emit('updateSearchVisibility', true)"
+    >
       Clients
     </div>
-    <div class="user-aside-tab" :class="{ 'user-aside-tab--active': !props.isActiveClients }" @click="emit('updateSearchVisibility', false)">
+    <div
+      class="user-aside-tab"
+      :class="{ 'user-aside-tab--active': !props.isActiveClients }"
+      @click="emit('updateSearchVisibility', false)"
+    >
       Rating
     </div>
   </div>

@@ -6,17 +6,17 @@ import {
   presetWebFonts,
   transformerDirectives,
   transformerVariantGroup,
-} from 'unocss'
+} from "unocss";
 
 export default defineConfig({
   shortcuts: [
     [
-      'btn',
-      'px-4 py-1 rounded inline-block bg-teal-600 text-white cursor-pointer hover:bg-teal-700 disabled:cursor-default disabled:bg-gray-600 disabled:opacity-50',
+      "btn",
+      "px-4 py-1 rounded inline-block bg-teal-600 text-white cursor-pointer hover:bg-teal-700 disabled:cursor-default disabled:bg-gray-600 disabled:opacity-50",
     ],
     [
-      'icon-btn',
-      'text-[0.9em] inline-block cursor-pointer select-none opacity-75 transition duration-200 ease-in-out hover:opacity-100 hover:text-teal-600 !outline-none',
+      "icon-btn",
+      "text-[0.9em] inline-block cursor-pointer select-none opacity-75 transition duration-200 ease-in-out hover:opacity-100 hover:text-teal-600 !outline-none",
     ],
   ],
   presets: [
@@ -24,36 +24,34 @@ export default defineConfig({
     presetAttributify(),
     presetIcons({
       collections: {
-        carbon: () => import('@iconify-json/carbon/icons.json').then(i => i.default),
-
+        carbon: () =>
+          import("@iconify-json/carbon/icons.json").then((i) => i.default),
       },
       scale: 1,
       warn: true,
       extraProperties: {
-        'display': 'inline-block',
-        'vertical-align': 'middle',
+        display: "inline-block",
+        "vertical-align": "middle",
       },
     }),
     presetWebFonts({
       fonts: {
-        sans: 'Montserrat',
+        sans: "Montserrat",
       },
     }),
   ],
   transformers: [transformerDirectives(), transformerVariantGroup()],
   theme: {
     breakpoints: {
-      'xsm': '375px',
-      'sm': '640px',
-      'md': '768px',
-      'lg': '1024px',
-      'xl': '1280px',
-      '2xl': '1536px',
-      '3xl': '1920px',
-      '4xl': '2240px',
+      xsm: "375px",
+      sm: "640px",
+      md: "768px",
+      lg: "1024px",
+      xl: "1280px",
+      "2xl": "1536px",
+      "3xl": "1920px",
+      "4xl": "2240px",
     },
-    colors: {
-
-    },
+    colors: {},
   },
-})
+});

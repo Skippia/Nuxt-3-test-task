@@ -1,16 +1,22 @@
 <script setup lang="ts">
 const props = defineProps<{
-  modelValue: string
-}>()
+  modelValue: string;
+}>();
 
 const emit = defineEmits<{
-  (e: 'update:modelValue', value: string): void
-}>()
+  (e: "update:modelValue", value: string): void;
+}>();
 </script>
 
 <template>
   <div class="search">
-    <input type="text" :value="props.modelValue" class="search-input" placeholder="Enter username to search" @input="emit('update:modelValue', $event.target.value)">
+    <input
+      type="text"
+      :value="props.modelValue"
+      class="search-input"
+      placeholder="Enter username to search"
+      @input="emit('update:modelValue', $event.target.value)"
+    />
     <button type="submit" class="search-button">
       <span class="i-carbon-search text-3xl" />
     </button>

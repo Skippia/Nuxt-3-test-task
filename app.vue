@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { appName } from '~/constants'
+import { appName } from "~/constants";
 
 useHead({
   htmlAttrs: {
-    lang: 'en',
+    lang: "en",
   },
   title: appName,
-})
+});
 </script>
 
 <template>

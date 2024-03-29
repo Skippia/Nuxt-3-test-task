@@ -3,23 +3,23 @@
     "scope": "javascript,typescript",
     "prefix": "im",
     "body": ["import { $1 } from '$2';"],
-    "description": "Import a module"
+    "description": "Import a module",
   },
   "export-all": {
     "scope": "javascript,typescript",
     "prefix": "ex",
     "body": ["export * from '$2';"],
-    "description": "Export a module"
+    "description": "Export a module",
   },
   "export-component": {
     "scope": "javascript,typescript",
     "prefix": "ed",
     "body": ["export { default as $1 } from '$2';"],
-    "description": "Export a component"
+    "description": "Export a component",
   },
   "vue-computed": {
     "scope": "javascript,typescript,vue",
     "prefix": "com",
-    "body": ["computed(() => { $1 })"]
+    "body": ["computed(() => { $1 })"],
   },
 }
