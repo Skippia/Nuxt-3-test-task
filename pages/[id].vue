@@ -3,6 +3,10 @@ import { UserCard } from '~/components'
 import { useGlobalState } from '~/store'
 import { loadCurrentClient } from '~/helpers/api'
 
+definePageMeta({
+  layout: 'aside',
+})
+
 const route = useRoute()
 const clientId = computed(() => route.params.id)
 

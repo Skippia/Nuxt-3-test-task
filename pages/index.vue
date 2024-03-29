@@ -2,6 +2,10 @@
 import type { ClientOnly } from '#build/components'
 import { breakpoints } from '~/composables'
 
+definePageMeta({
+  layout: 'aside',
+})
+
 const isLargerThanPhone = breakpoints.greaterOrEqual('tablet')
 </script>
 
